@@ -1,0 +1,52 @@
+{
+    "name": "TransMark",
+    "version": "1.0",
+    "description": "Preview the left sidebar of HTML to Markdown, and use GPT translation after previewing.",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab"
+    ],
+    "host_permissions": [
+        "https://*/*"
+    ],
+    "content_scripts": [
+        {
+            "js": [
+                "vendor/moment.js",
+                "vendor/simplemde/simplemde.min.js",
+                "scripts/markdown.js",
+                "scripts/content.js",
+                "vendor/readability.js",
+                "vendor/turndown.js",
+                "vendor/turndown-plugin-gfm.js"
+            ],
+            "matches": [
+                "https://*/*"
+            ],
+            "css": [
+                "css/content.css",
+                "vendor/simplemde/simplemde.min.css"
+            ]
+        }
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self';style-src 'self' https//maxcdn.bootstrapcdn.com;",
+        "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+    },
+    "action": {
+        "default_icon": {
+            "16": "icon.png",
+            "32": "icon.png",
+            "48": "icon.png",
+            "128": "icon.png"
+        },
+        "default_title": "Settings",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "icon.png",
+        "32": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }
+}

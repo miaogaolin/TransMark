@@ -1,0 +1,19 @@
+#transmark-icon {
+    position: fixed;
+    right: 10px;
+    bottom: 0;
+    z-index: 9999;
+}
+
+#transmark-preview {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    bottom: 50px;
+    right: 0;
+    width: 400px;
+    border: 1px solid rgb(163, 163, 163);
+    border-radius: 5px;
+    background-color: white;
+    overflow: auto;
+}
