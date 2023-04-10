@@ -857,7 +857,9 @@ TurndownService = (function () {
 
             var replacement = '';
             if (node.nodeType === 3) {
-                replacement = node.isCode ? node.nodeValue : decodeURIComponent(node.nodeValue);
+                // console.log('node:', node.nodeValue);
+                // node.isCode
+                replacement = node.nodeValue;
             } else if (node.nodeType === 1) {
                 replacement = replacementForNode.call(self, node);
             }

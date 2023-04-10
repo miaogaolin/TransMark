@@ -27,6 +27,18 @@ const defaultOptions = {
     obsidianFolder: "",
 };
 
+
+// 使用哈希函数生成唯一标识
+function generateUniqueId(str) {
+    var hash = 0, i, chr;
+    for (i = 0; i < str.length; i++) {
+        chr = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+}
+
 // get Readability article info from the dom passed in
 function getArticleFromDom(domString) {
     // parse the dom
@@ -87,19 +99,32 @@ function getArticleFromDom(domString) {
     // simplify the dom into an article
     const article = new Readability(dom).parse();
     // get the base uri from the dom and attach it as important article info
-    article.baseURI = dom.baseURI;
+
+    if (!article) {
+        return;
+    }
     // also grab the page title
-    article.pageTitle = dom.title;
-    // and some URL info
-    const url = new URL(dom.baseURI);
-    article.hash = url.hash;
-    article.host = url.host;
-    article.origin = url.origin;
-    article.hostname = url.hostname;
-    article.pathname = url.pathname;
-    article.port = url.port;
-    article.protocol = url.protocol;
-    article.search = url.search;
+    if (dom.title) {
+        article.pageTitle = dom.title;
+    }
+    if (dom.baseURI) {
+        article.baseURI = dom.baseURI;
+        // and some URL info
+        const url = new URL(dom.baseURI);
+        if (url.hash) {
+            article.hash = url.hash;
+        } else {
+            article.hash = generateUniqueId(dom.baseURI);
+        }
+
+        article.host = url.host;
+        article.origin = url.origin;
+        article.hostname = url.hostname;
+        article.pathname = url.pathname;
+        article.port = url.port;
+        article.protocol = url.protocol;
+        article.search = url.search;
+    }
 
 
     // make sure the dom has a head

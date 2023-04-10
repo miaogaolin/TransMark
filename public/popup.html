@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TransMark</title>
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #007bff;
+      margin-bottom: 20px;
+      width: 300px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0069d9;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    <label for="api-key">OpenAI API Key:</label>
+    <input type="text" id="api-key" name="api-key">
+    <button type="button" id="save">Save</button>
+  </form>
+
+  <script src="./scripts/popup.js"></script>
+</body>
+
+</html>

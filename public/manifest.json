@@ -4,7 +4,9 @@
     "description": "Preview the left sidebar of HTML to Markdown, and use GPT translation after previewing.",
     "manifest_version": 3,
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "tabs",
+        "storage"
     ],
     "host_permissions": [
         "https://*/*"
@@ -12,27 +14,36 @@
     "content_scripts": [
         {
             "js": [
+                "scripts/gpt.js",
                 "vendor/moment.js",
                 "vendor/simplemde/simplemde.min.js",
-                "scripts/markdown.js",
-                "scripts/content.js",
                 "vendor/readability.js",
                 "vendor/turndown.js",
-                "vendor/turndown-plugin-gfm.js"
+                "vendor/turndown-plugin-gfm.js",
+                "scripts/markdown.js",
+                "scripts/content.js"
             ],
             "matches": [
-                "https://*/*"
+                "<all_urls>"
             ],
             "css": [
-                "css/content.css",
-                "vendor/simplemde/simplemde.min.css"
+                "css/content.css"
             ]
         }
     ],
-    "content_security_policy": {
-        "extension_pages": "script-src 'self'; object-src 'self';style-src 'self' https//maxcdn.bootstrapcdn.com;",
-        "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+    "background": {
+        "service_worker": "background.js"
     },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "iframe.html"
+            ],
+            "matches": [
+                "https://*/*"
+            ]
+        }
+    ],
     "action": {
         "default_icon": {
             "16": "icon.png",
