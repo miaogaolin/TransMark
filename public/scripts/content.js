@@ -97,7 +97,10 @@ window.addEventListener("load", function (event) {
 
 window.addEventListener("message", function (event) {
     if (event.data.type == "translate-click" && event.data.message.length > 0) {
-        tranlsate(event.data.message);
+        translate(event.data.message, function (port) {
+            port.disconnect();
+            tranIcon.classList.remove('icon-pause');
+            tranIcon.innerHTML = tranSvg;
+        });
     }
 }, false);
-   

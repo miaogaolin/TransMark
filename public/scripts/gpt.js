@@ -38,7 +38,7 @@ function spliceText(markdownText) {
 }
 
 let port;
-async function tranlsate(text) {
+function translate(text, callback) {
   let arr = spliceText(text);
 
   const controller = new AbortController();
@@ -51,7 +51,7 @@ async function tranlsate(text) {
     if (msg.response == "[DONE]") {
       i++;
       if (i >= arr.length) {
-        port.disconnect();
+        callback(port);
         return;
       }
       let messages = getMessagtes(arr[i]);
@@ -125,7 +125,7 @@ function streamRequest(messages, signal, port) {
             }
             const { choices } = resp
             if (!choices || choices.length === 0) {
-              return { error: 'No result' }
+              return { error: 'No result' };
             }
             const { finish_reason: finishReason } = choices[0]
             if (finishReason) {
